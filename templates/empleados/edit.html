@@ -1,0 +1,84 @@
+{% include 'header.html' %}
+
+{%with messages = get_flashed_messages() %}
+
+{%if messages %}
+    <div class="aler alert-danger" role="alert">
+    {% for message in messages %}
+        {{message}}
+    {%endfor%}
+    </div>
+   
+        
+{% endif %}
+
+{%endwith%}
+
+
+
+<br>
+{% for empleado in empleados %}
+  
+
+  <form  method="post" action="/update" enctype="multipart/form-data">
+    <div class="card" >
+      <div class="card-header" >
+       Ediat Empleado
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Datos del Empleado</h5>
+        <p class="card-text">
+
+          <div class="form-group">
+            <label for="txtNombre">Nombre:</label>
+            <input id="txtNombre" class="form-control" type="text" value="{{empleado[1]}}" name="txtNombre">
+          </div>
+
+
+          <div class="form-group">
+            <label for="txtApellido">Apellido:</label>
+            <input id="txtApellido" class="form-control" type="text" value="{{empleado[2]}}" name="txtApellido">
+          </div>
+
+          <div class="form-group">
+            <label for="txtCorreo">Correo:</label>
+            <input id="txtCorreo" class="form-control" type="email" value="{{empleado[3]}}" name="txtCorreo">
+          </div>
+
+          <div class="form-group">
+            <label for="txtCelular">Celular:</label>
+            <input id="txtCelular" class="form-control" type="text" value="{{empleado[4]}}" name="txtCelular">
+          </div>
+
+          <div class="form-group">
+            <label for="txtFoto">Foto:</label>
+            <img class="img-thumbnail" width="150" src="{{url_for('uploads', nombreFoto=empleado[5])}}" alt="">
+   
+            <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+          </div>
+
+
+  <input type="hidden" value="{{empleado[0]}}" name="txtId" id=""txtId>
+   <br>
+    <div class="form-group">
+
+      <input class="btn btn-outline-success" type="submit" value="Agregar">
+      <a class="btn btn-outline-primary" href="{{url_for('index')}}">Regresar</a>
+      </div>
+    
+
+
+
+
+
+        </p>
+      </div>
+    </div>
+
+    
+
+    
+</form> 
+{% endfor %}  
+
+{% include 'footer.html' %}

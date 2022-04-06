@@ -1,12 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Inicio</title>
-</head>
-<body>
-    <h1>Hola Flask!</h1>
-</body>
-</html>
+{% include 'header.html' %}
+
+
+<br/>
+<a href="{{url_for('create')}}" class="btn btn-outline-success">
+    Ingresar Nuevo Empleado
+</a>
+<br>
+<br>
+
+  <table class="table table-light" style="width: 1300px;">
+      <thead class="thead-light">
+          <tr>
+                 <th> <b>#</b> </th>
+                <th>Foto</th>
+                <th>Nombre</th>  
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Celular</th>               
+                <th>Acciones</th> 
+          </tr>
+      </thead>
+      <tbody>         
+            {% for empleado in empleados %} <!--Uso de jfor (Jinja2)-->
+            <tr>                
+                <td>{{empleado [0]}}</td>
+
+                <td>
+                    <img class="img-thumbnail" width="150" src="uploads/{{empleado [5]}}" alt="">
+                    
+                
+                </td>
+
+
+                <td>{{empleado [1]}}</td>            
+                <td>{{empleado [2]}}</td>
+                <td>{{empleado [3]}}</td>
+                <td>{{empleado [4]}}</td>
+                
+                <td><a class="btn btn-outline-info" href="/edit/{{empleado [0]}}">Editar</a> |
+                <a onclick="return confirm('¿Desea Eliminar Este Empleado?')" class="btn btn-outline-danger" href="/destroy/{{empleado [0]}}">Eliminar</a>
+                 </td>
+            </tr>
+            {% endfor %}
+        
+      </tbody>
+  </table>
+
+{% include 'footer.html' %}
